@@ -216,9 +216,25 @@ The {{PROJECT_SHORT_NAME}} domain centers on {{DOMAIN_DESCRIPTION}}:
 
 _No entries yet. Copilot will add discoveries here as development progresses._
 
+- ✅ **WORKS**: UST policy-aligned GWA mapping with PE/NSTP exclusion can be implemented cleanly by adding `courseType` metadata and filtering in calculator utilities. — _2026-04-04, `ust-web/lib/constants.ts`, `ust-web/lib/gradeCalculator.ts`_
+- ✅ **WORKS**: Honors and Dean's List logic is maintainable when split into dedicated modules (`honorsCalculator` / `deansListCalculator`) and consumed via small presentation components. — _2026-04-04, `ust-web/lib/honorsCalculator.ts`, `ust-web/lib/deansListCalculator.ts`, `ust-web/components/*`_
+- ⚠️ **GOTCHA**: `app/schedule/page.tsx` semester state must use lowercase values (`first|second|summer`) to match `SemesterType`; uppercase values break type-check during build. — _2026-04-04, `ust-web/app/schedule/page.tsx`, `ust-web/lib/calendarGenerator.ts`_
+- ⚠️ **GOTCHA**: Current repo has no `npm test` script; test-phase tasks must be marked blocked until a test runner/script is added. — _2026-04-04, `ust-web/package.json`_
+- ✅ **WORKS**: UST schedule parsing is reliable when tabular parsing is combined with free-form fallback and continuation-line handling; this covers real portal exports and compact OCR-like lines. — _2026-04-04, `ust-web/lib/scheduleParser.ts`_
+- ✅ **WORKS**: ICS import reliability improves with explicit `VTIMEZONE` (`Asia/Manila`), escaped ICS field values, and `VALARM` reminders per event. — _2026-04-04, `ust-web/lib/calendarGenerator.ts`_
+- ⚠️ **GOTCHA**: Broken template literals in sample schedule text can fail Turbopack with `Unterminated template`; keep pasted examples simple and valid TS string literals. — _2026-04-04, `ust-web/app/schedule/page.tsx`_
+
 ### Architecture & Integrations
 
 - ✅ **WORKS**: Utilizing Convex for high-frequency UI mutations and Supabase for reporting and blob storage. — _2026-04-02_
+- ✅ **WORKS**: Framer Motion integrates cleanly with Next.js 16 App Router when components are marked `'use client'`; animation variants centralized in `lib/animations.ts` keep pages DRY. — _2026-04-05, `ust-web/lib/animations.ts`, `ust-web/components/miro/*`_
+- ⚠️ **GOTCHA**: Framer Motion `useInView` margin parameter requires literal type assertion (e.g., `margin: '-100px' as const`) or TypeScript will complain. — _2026-04-05, `ust-web/lib/animations.ts`_
+- ⚠️ **GOTCHA**: Framer Motion ease values need explicit `Easing` type import when used in transition objects to satisfy stricter TypeScript checking. — _2026-04-05, `ust-web/components/miro/FloatingElement.tsx`_
+- ✅ **WORKS**: Creating a component library under `components/miro/` with barrel exports (`index.ts`) enables clean imports (`import { MiroCard, GradientText } from '@/components/miro'`). — _2026-04-05, `ust-web/components/miro/index.ts`_
+- ✅ **WORKS**: UST curriculum pages have consistent table structure for most programs; scraping with regex-based HTML parsing works for STEM/ABM/HUMSS clusters. — _2026-04-04, `ust-web/lib/scraper/ustCurriculumScraper.ts`_
+- ⚠️ **GOTCHA**: MAD cluster (Music/Arts) programs have non-standard table HTML that causes course merging issues; parser stops at wrong curriculum boundaries. — _2026-04-04, `ust-web/lib/data/VALIDATION.md`_
+- ⚠️ **GOTCHA**: Some Health programs (e.g., Nursing) span curriculum tables across multiple page sections; scraper only captures first 2 years. — _2026-04-04, `ust-web/lib/data/VALIDATION.md`_
+- ✅ **WORKS**: Cascading dropdown UI (cluster→program→year→semester) provides good UX for curriculum selection; reset dependent values when parent changes. — _2026-04-04, `ust-web/components/ProgramSelector.tsx`_
 
 ---
 
@@ -226,7 +242,10 @@ _No entries yet. Copilot will add discoveries here as development progresses._
 
 <!-- Track issues here. Format: 🔴 OPEN / 🟡 INVESTIGATING / 🟢 RESOLVED -->
 
-_No known issues yet._
+- 🔴 **[OPEN]** Automated unit/integration tests for the new GWA/honors/dean's-list logic are not implemented because `npm test` script is missing. — _2026-04-04_
+- 🟢 **[RESOLVED]** `schedule` page semester type mismatch (`'FIRST'|'SECOND'|'SUMMER'` vs `SemesterType`) caused build type error. — _2026-04-04, fixed by switching to lowercase `SemesterType` values in `ust-web/app/schedule/page.tsx`_
+- 🟢 **[RESOLVED]** Schedule route build failures from malformed `loadExample` content (`Unterminated template`) blocked `/schedule` page generation. — _2026-04-04, fixed by rebuilding `ust-web/app/schedule/page.tsx` with valid template string content_
+- 🟢 **[RESOLVED]** Calendar export lacked timezone block and consistent ICS escaping/reminder reliability. — _2026-04-04, fixed in `ust-web/lib/calendarGenerator.ts` by adding `VTIMEZONE`, ICS escaping, and per-event `VALARM` handling_
 
 ---
 
@@ -234,10 +253,20 @@ _No known issues yet._
 
 <!-- Copilot: OVERWRITE this section at the end of every session -->
 
-**Last updated**: _2026-04-02_
+**Last updated**: _2026-04-04_
 
-- Migrated workspace template to Next.js + Convex + Supabase architecture.
-- Removed legacy Python Azure configurations and obsolete agents.
+- **UST Curriculum Scraper implemented** — Auto-populate GWA calculator with program courses:
+  - Scraped **94 programs** from ust.edu.ph across 5 clusters (STEM, Health, ABM, HUMSS, MAD)
+  - **4.8MB curriculum data** stored in `lib/data/ust-curricula.json`
+  - New scraper module: `lib/scraper/` with types, parser, and scraping utilities
+  - Data store helpers: `lib/data/curricula.ts` for querying programs/courses
+- **GWA Calculator now has Quick Load feature** (`app/gwa/page.tsx`):
+  - New `ProgramSelector` component with cascading dropdowns
+  - Select Cluster → Program → Year → Semester to auto-load courses
+  - Courses marked with "From Curriculum" badge
+  - Manual entry still available for custom courses
+- **Validation completed**: 3/5 programs fully validated; known issues with MAD cluster parsing
+- Build and lint pass successfully
 
 ---
 
@@ -245,9 +274,11 @@ _No known issues yet._
 
 <!-- Copilot: OVERWRITE this section at the end of every session -->
 
-1. **Initialize Next.js App** — Scaffold `{{WA_REPO_NAME}}` with Convex and Supabase dependencies.
-2. **Setup Sub-Repo Instructions** — Create `.github/instructions` in `{{WA_REPO_NAME}}` for component standards.
-3. **Fill remaining template placeholders** — Replace unresolved `{{PLACEHOLDER}}` markers in this knowledge base.
+1. **Fix MAD cluster parsing** — Update scraper to handle Music/Arts programs with non-standard HTML tables; re-scrape affected programs.
+2. **Re-scrape Health programs** — Some programs missing later years; investigate curriculum page structure differences.
+3. **Add Formal Test Harness** — Introduce `npm test` (e.g., Vitest/Jest) and migrate current script-based checks into repeatable CI-friendly tests.
+4. **Add prefers-reduced-motion support** — Update `lib/animations.ts` to detect and disable animations for users who prefer reduced motion.
+5. **Implement OCR Input Path** — Wire screenshot upload + OCR extraction into the schedule parser UI flow with correction UX.
 
 ---
 

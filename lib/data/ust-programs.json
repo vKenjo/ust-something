@@ -1,0 +1,598 @@
+{
+  "programs": [
+    {
+      "name": "Bachelor of Science in Applied Mathematics major in Actuarial Science",
+      "slug": "bachelor-of-science-in-applied-mathematics-major-in-actuarial-science",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-applied-mathematics-major-in-actuarial-science/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Architecture",
+      "slug": "bachelor-of-science-in-architecture",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-architecture/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Biochemistry",
+      "slug": "bachelor-of-science-in-biochemistry",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-biochemistry/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Biology",
+      "slug": "bachelor-of-science-in-biology",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-biology/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Biology major in Environmental Biology",
+      "slug": "bachelor-of-science-in-biology-major-in-environmental-biology",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-biology-major-in-environmental-biology/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Biology major in Industrial Biology",
+      "slug": "bachelor-of-science-in-biology-major-in-industrial-biology",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-biology-major-in-industrial-biology/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Biology major in Medical Biology",
+      "slug": "bachelor-of-science-in-biology-major-in-medical-biology",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-biology-major-in-medical-biology/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Chemical Engineering",
+      "slug": "bachelor-of-science-in-chemical-engineering",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-chemical-engineering/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Chemistry",
+      "slug": "bachelor-of-science-in-chemistry",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-chemistry/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Civil Engineering",
+      "slug": "bachelor-of-science-in-civil-engineering",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-civil-engineering/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Computer Science",
+      "slug": "bachelor-of-science-in-computer-science",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-computer-science/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Electrical Engineering",
+      "slug": "bachelor-of-science-in-electrical-engineering",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-electrical-engineering/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Electronics Engineering",
+      "slug": "bachelor-of-science-in-electronics-engineering",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-electronics-engineering/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Food Technology",
+      "slug": "bachelor-of-science-in-food-technology",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-food-technology/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Industrial Engineering",
+      "slug": "bachelor-of-science-in-industrial-engineering",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-industrial-engineering/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Information Systems",
+      "slug": "bachelor-of-science-in-information-systems",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-information-systems/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Information Technology",
+      "slug": "bachelor-of-science-in-information-technology",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-information-technology/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Applied Physics major in Instrumentation",
+      "slug": "bachelor-of-science-in-applied-physics-major-in-instrumentation",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-applied-physics-major-in-instrumentation/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Library and Information Science",
+      "slug": "bachelor-of-library-and-information-science",
+      "url": "https://www.ust.edu.ph/bachelor-of-library-and-information-science/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Mechanical Engineering",
+      "slug": "bachelor-of-science-in-mechanical-engineering",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-mechanical-engineering/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Microbiology",
+      "slug": "bachelor-of-science-in-microbiology",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-microbiology/",
+      "cluster": "STEM"
+    },
+    {
+      "name": "Bachelor of Science in Basic Human Studies",
+      "slug": "bachelor-of-science-in-basic-human-studies",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-basic-human-studies/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Pharmacy major in Clinical Pharmacy",
+      "slug": "bachelor-of-science-in-pharmacy-major-in-clinical-pharmacy",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-pharmacy-major-in-clinical-pharmacy/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Medical Technology",
+      "slug": "bachelor-of-science-in-medical-technology",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-medical-technology/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Nursing",
+      "slug": "bachelor-of-science-in-nursing",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-nursing/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Nutrition and Dietetics",
+      "slug": "bachelor-of-science-in-nutrition-and-dietetics",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-nutrition-and-dietetics/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Occupational Therapy",
+      "slug": "bachelor-of-science-in-occupational-therapy",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-occupational-therapy/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Pharmacy",
+      "slug": "bachelor-of-science-in-pharmacy",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-pharmacy/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Physical Therapy",
+      "slug": "bachelor-of-science-in-physical-therapy",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-physical-therapy/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Speech-Language Pathology",
+      "slug": "bachelor-of-science-in-speech-language-pathology",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-speech-language-pathology/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Bachelor of Science in Accountancy",
+      "slug": "bachelor-of-science-in-accountancy",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-accountancy/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Accounting Information System",
+      "slug": "bachelor-of-science-in-accounting-information-system",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-accounting-information-system/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Business Administration major in Business Economics",
+      "slug": "bachelor-of-science-in-business-administration-major-in-business-economics",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-business-administration-major-in-business-economics/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Hospitality Management major in Culinary Entrepreneurship",
+      "slug": "bachelor-of-science-in-hospitality-management-major-in-culinary-entrepreneurship",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-hospitality-management-major-in-culinary-entrepreneurship/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Entrepreneurship",
+      "slug": "bachelor-of-science-in-entrepreneurship",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-entrepreneurship/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Business Administration major in Financial Management",
+      "slug": "bachelor-of-science-in-business-administration-major-in-financial-management",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-business-administration-major-in-financial-management/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Hospitality Management major in Hospitality Leadership",
+      "slug": "bachelor-of-science-in-hospitality-management-major-in-hospitality-leadership",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-hospitality-management-major-in-hospitality-leadership/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Business Administration major in Human Resource Management",
+      "slug": "bachelor-of-science-in-business-administration-major-in-human-resource-management",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-business-administration-major-in-human-resource-management/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Management Accounting",
+      "slug": "bachelor-of-science-in-management-accounting",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-management-accounting/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Business Administration major in Marketing Management",
+      "slug": "bachelor-of-science-in-business-administration-major-in-marketing-management",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-business-administration-major-in-marketing-management/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Tourism Management major in Recreation and Leisure Management",
+      "slug": "bachelor-of-science-in-tourism-management-major-in-recreation-and-leisure-management",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-tourism-management-major-in-recreation-and-leisure-management/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Science in Tourism Management major in Travel Operation and Service Management",
+      "slug": "bachelor-of-science-in-tourism-management-major-in-travel-operation-and-service-management",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-tourism-management-major-in-travel-operation-and-service-management/",
+      "cluster": "ABM"
+    },
+    {
+      "name": "Bachelor of Arts in Asian Studies",
+      "slug": "bachelor-of-arts-in-asian-studies",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-asian-studies/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Behavioral Science",
+      "slug": "bachelor-of-arts-in-behavioral-science",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-behavioral-science/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Secondary Education major in Biological Sciences Education",
+      "slug": "bachelor-of-secondary-education-major-in-biological-sciences-education",
+      "url": "https://www.ust.edu.ph/bachelor-of-secondary-education-major-in-biological-sciences-education/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Communication",
+      "slug": "bachelor-of-arts-in-communication",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-communication/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Creative Writing",
+      "slug": "bachelor-of-arts-in-creative-writing",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-creative-writing/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Early Childhood Education",
+      "slug": "bachelor-of-early-childhood-education",
+      "url": "https://www.ust.edu.ph/bachelor-of-early-childhood-education/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Economics",
+      "slug": "bachelor-of-arts-in-economics",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-economics/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Elementary Education",
+      "slug": "bachelor-of-elementary-education",
+      "url": "https://www.ust.edu.ph/bachelor-of-elementary-education/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Secondary Education major in English",
+      "slug": "bachelor-of-secondary-education-major-in-english",
+      "url": "https://www.ust.edu.ph/bachelor-of-secondary-education-major-in-english/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in English Language Studies",
+      "slug": "bachelor-of-arts-in-english-language-studies",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-english-language-studies/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Secondary Education major in Filipino",
+      "slug": "bachelor-of-secondary-education-major-in-filipino",
+      "url": "https://www.ust.edu.ph/bachelor-of-secondary-education-major-in-filipino/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in History",
+      "slug": "bachelor-of-arts-in-history",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-history/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Journalism",
+      "slug": "bachelor-of-arts-in-journalism",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-journalism/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Legal Management",
+      "slug": "bachelor-of-arts-in-legal-management",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-legal-management/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Literature",
+      "slug": "bachelor-of-arts-in-literature",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-literature/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Secondary Education major in Mathematics",
+      "slug": "bachelor-of-secondary-education-major-in-mathematics",
+      "url": "https://www.ust.edu.ph/bachelor-of-secondary-education-major-in-mathematics/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Philosophy",
+      "slug": "bachelor-of-arts-in-philosophy",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-philosophy/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Political Science",
+      "slug": "bachelor-of-arts-in-political-science",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-political-science/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Elementary Education major in Pre-School Education",
+      "slug": "bachelor-of-elementary-education-major-in-pre-school-education",
+      "url": "https://www.ust.edu.ph/bachelor-of-elementary-education-major-in-pre-school-education/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Science in Psychology",
+      "slug": "bachelor-of-science-in-psychology",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-psychology/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Secondary Education major in Religious and Values Education",
+      "slug": "bachelor-of-secondary-education-major-in-religious-and-values-education",
+      "url": "https://www.ust.edu.ph/bachelor-of-secondary-education-major-in-religious-and-values-education/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Secondary Education major in Science",
+      "slug": "bachelor-of-secondary-education-major-in-science",
+      "url": "https://www.ust.edu.ph/bachelor-of-secondary-education-major-in-science/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Secondary Education major in Social Studies",
+      "slug": "bachelor-of-secondary-education-major-in-social-studies",
+      "url": "https://www.ust.edu.ph/bachelor-of-secondary-education-major-in-social-studies/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Arts in Sociology",
+      "slug": "bachelor-of-arts-in-sociology",
+      "url": "https://www.ust.edu.ph/bachelor-of-arts-in-sociology/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Special Needs Education major in Early Childhood Education",
+      "slug": "bachelor-of-special-needs-education-major-in-early-childhood-education",
+      "url": "https://www.ust.edu.ph/bachelor-of-special-needs-education-major-in-early-childhood-education/",
+      "cluster": "HUMSS"
+    },
+    {
+      "name": "Bachelor of Fine Arts major in Advertising Arts",
+      "slug": "bachelor-of-fine-arts-major-in-advertising-arts",
+      "url": "https://www.ust.edu.ph/bachelor-of-fine-arts-major-in-advertising-arts/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Bassoon",
+      "slug": "bachelor-of-music-in-performance-major-in-bassoon",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-bassoon/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Choral Conducting",
+      "slug": "bachelor-of-music-in-performance-major-in-choral-conducting",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-choral-conducting/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Clarinet",
+      "slug": "bachelor-of-music-in-performance-major-in-clarinet",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-clarinet/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Composition",
+      "slug": "bachelor-of-music-in-composition",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-composition/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Contra Bass",
+      "slug": "bachelor-of-music-in-performance-major-in-contra-bass",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-contra-bass/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Flute",
+      "slug": "bachelor-of-music-in-performance-major-in-flute",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-flute/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in French Horn",
+      "slug": "bachelor-of-music-in-performance-major-in-french-horn",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-french-horn/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Guitar",
+      "slug": "bachelor-of-music-in-performance-major-in-guitar",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-guitar/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Fine Arts major in Industrial Design",
+      "slug": "bachelor-of-fine-arts-major-in-industrial-design",
+      "url": "https://www.ust.edu.ph/bachelor-of-fine-arts-major-in-industrial-design/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Science in Interior Design",
+      "slug": "bachelor-of-science-in-interior-design",
+      "url": "https://www.ust.edu.ph/bachelor-of-science-in-interior-design/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Jazz",
+      "slug": "bachelor-of-music-in-jazz",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-jazz/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Musicology",
+      "slug": "bachelor-of-music-in-musicology",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-musicology/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Music Education",
+      "slug": "bachelor-of-music-in-music-education",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-music-education/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music major in Music Literature",
+      "slug": "bachelor-of-music-major-in-music-literature",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-major-in-music-literature/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Music Theatre",
+      "slug": "bachelor-of-music-in-music-theatre",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-music-theatre/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music major in Music Theory",
+      "slug": "bachelor-of-music-major-in-music-theory",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-major-in-music-theory/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Music Technology",
+      "slug": "bachelor-of-music-in-music-technology",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-music-technology/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Oboe",
+      "slug": "bachelor-of-music-in-performance-major-in-oboe",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-oboe/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Orchestral Conducting",
+      "slug": "bachelor-of-music-in-performance-major-in-orchestral-conducting",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-orchestral-conducting/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Fine Arts major in Painting",
+      "slug": "bachelor-of-fine-arts-major-in-painting",
+      "url": "https://www.ust.edu.ph/bachelor-of-fine-arts-major-in-painting/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Percussion",
+      "slug": "bachelor-of-music-in-performance-major-in-percussion",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-percussion/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Piano",
+      "slug": "bachelor-of-music-in-performance-major-in-piano",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-piano/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Saxophone",
+      "slug": "bachelor-of-music-in-performance-major-in-saxophone",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-saxophone/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Trombone",
+      "slug": "bachelor-of-music-in-performance-major-in-trombone",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-trombone/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Trumpet",
+      "slug": "bachelor-of-music-in-performance-major-in-trumpet",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-trumpet/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Tuba",
+      "slug": "bachelor-of-music-in-performance-major-in-tuba",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-tuba/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Viola",
+      "slug": "bachelor-of-music-in-performance-major-in-viola",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-viola/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Violin",
+      "slug": "bachelor-of-music-in-performance-major-in-violin",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-violin/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Violoncello",
+      "slug": "bachelor-of-music-in-performance-major-in-violoncello",
+      "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-music-in-performance-major-in-violoncello/",
+      "cluster": "MAD"
+    },
+    {
+      "name": "Bachelor of Music in Performance major in Voice",
+      "slug": "bachelor-of-music-in-performance-major-in-voice",
+      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-voice/",
+      "cluster": "MAD"
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2025-01-13",
+    "totalPrograms": 98,
+    "clusters": ["STEM", "Health", "ABM", "HUMSS", "MAD", "PES"],
+    "source": "https://www.ust.edu.ph/academics/programs/"
+  }
+}
