@@ -39,103 +39,131 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-  /* Miro-inspired custom colors */
-  --color-miro-navy: var(--miro-navy);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 2.5);
+  --radius-4xl: calc(var(--radius) * 3);
+  /* Miro design tokens */
   --color-miro-blue: var(--miro-blue);
-  --color-miro-purple: var(--miro-purple);
+  --color-miro-blue-pressed: var(--miro-blue-pressed);
+  --color-miro-success: var(--miro-success);
+  --color-miro-slate: var(--miro-slate);
+  /* Pastel accents */
+  --color-miro-coral-light: var(--miro-coral-light);
+  --color-miro-coral-dark: var(--miro-coral-dark);
+  --color-miro-rose-light: var(--miro-rose-light);
+  --color-miro-teal-light: var(--miro-teal-light);
+  --color-miro-teal-dark: var(--miro-teal-dark);
+  --color-miro-orange-light: var(--miro-orange-light);
+  --color-miro-pink: var(--miro-pink);
+  /* UST brand accent */
   --color-ust-yellow: var(--ust-yellow);
   --color-ust-yellow-light: var(--ust-yellow-light);
   --color-ust-yellow-dark: var(--ust-yellow-dark);
 }
 
 :root {
-  /* Miro-inspired palette with UST Yellow accent */
-  --background: #FAFAFA;
-  --foreground: #050038;
-  --card: #FFFFFF;
-  --card-foreground: #050038;
-  --popover: #FFFFFF;
-  --popover-foreground: #050038;
-  --primary: #FDB813; /* UST Yellow */
-  --primary-foreground: #050038;
-  --secondary: #4262FF; /* Miro Blue */
-  --secondary-foreground: #FFFFFF;
-  --muted: #F5F5F5;
-  --muted-foreground: #64748B;
-  --accent: #FFE066; /* Soft yellow highlight */
-  --accent-foreground: #050038;
+  /* Miro Light Theme - exact from DESIGN.md */
+  --background: #ffffff;
+  --foreground: #1c1c1e; /* Miro near-black */
+  --card: #ffffff;
+  --card-foreground: #1c1c1e;
+  --popover: #ffffff;
+  --popover-foreground: #1c1c1e;
+  --primary: #FDB813; /* UST Yellow - brand accent */
+  --primary-foreground: #1c1c1e;
+  --secondary: #5b76fe; /* Miro Blue 450 - primary interactive */
+  --secondary-foreground: #ffffff;
+  --muted: #f5f5f5;
+  --muted-foreground: #555a6a; /* Miro slate */
+  --accent: #FFE066;
+  --accent-foreground: #1c1c1e;
   --destructive: #EF4444;
-  --border: #E5E7EB;
-  --input: #E5E7EB;
-  --ring: #FDB813;
+  --border: #e0e2e8; /* Miro ring border color */
+  --input: #e9eaef; /* Miro input border */
+  --ring: #5b76fe; /* Miro Blue for focus rings */
   --chart-1: #FDB813;
-  --chart-2: #4262FF;
+  --chart-2: #5b76fe;
   --chart-3: #8B5CF6;
-  --chart-4: #22C55E;
+  --chart-4: #00b473; /* Miro success */
   --chart-5: #F97316;
-  --radius: 1rem; /* Miro-style generous rounding */
-  --sidebar: #FAFAFA;
-  --sidebar-foreground: #050038;
+  --radius: 8px; /* Miro button radius */
+  
+  /* Sidebar (keeping consistent) */
+  --sidebar: #fafafa;
+  --sidebar-foreground: #1c1c1e;
   --sidebar-primary: #FDB813;
-  --sidebar-primary-foreground: #050038;
+  --sidebar-primary-foreground: #1c1c1e;
   --sidebar-accent: #FFF8E1;
-  --sidebar-accent-foreground: #050038;
-  --sidebar-border: #E5E7EB;
-  --sidebar-ring: #FDB813;
-  /* Miro custom tokens */
-  --miro-navy: #050038;
-  --miro-blue: #4262FF;
-  --miro-purple: #8B5CF6;
+  --sidebar-accent-foreground: #1c1c1e;
+  --sidebar-border: #e0e2e8;
+  --sidebar-ring: #5b76fe;
+  
+  /* Miro exact tokens */
+  --miro-blue: #5b76fe;
+  --miro-blue-pressed: #2a41b6;
+  --miro-success: #00b473;
+  --miro-slate: #555a6a;
+  --miro-input-placeholder: #a5a8b5;
+  
+  /* Miro pastel accents */
+  --miro-coral-light: #ffc6c6;
+  --miro-coral-dark: #600000;
+  --miro-rose-light: #ffd8f4;
+  --miro-teal-light: #c3faf5;
+  --miro-teal-dark: #187574;
+  --miro-orange-light: #ffe6cd;
+  --miro-pink: #fde0f0;
+  
+  /* UST brand */
   --ust-yellow: #FDB813;
   --ust-yellow-light: #FFE066;
   --ust-yellow-dark: #E5A50F;
 }
 
 .dark {
-  --background: #050038;
-  --foreground: #FAFAFA;
-  --card: #0A0052;
-  --card-foreground: #FAFAFA;
-  --popover: #0A0052;
-  --popover-foreground: #FAFAFA;
+  /* Miro Dark Theme adaptation */
+  --background: #1c1c1e;
+  --foreground: #fafafa;
+  --card: #2a2a2c;
+  --card-foreground: #fafafa;
+  --popover: #2a2a2c;
+  --popover-foreground: #fafafa;
   --primary: #FDB813;
-  --primary-foreground: #050038;
-  --secondary: #6B8AFF;
-  --secondary-foreground: #050038;
-  --muted: #1A1A4A;
-  --muted-foreground: #A0A0B0;
+  --primary-foreground: #1c1c1e;
+  --secondary: #6b8aff; /* Lighter blue for dark mode */
+  --secondary-foreground: #1c1c1e;
+  --muted: #3a3a3c;
+  --muted-foreground: #a0a0a5;
   --accent: #FFE066;
-  --accent-foreground: #050038;
+  --accent-foreground: #1c1c1e;
   --destructive: #F87171;
-  --border: #2A2A5A;
-  --input: #2A2A5A;
-  --ring: #FDB813;
+  --border: #3a3a3c;
+  --input: #3a3a3c;
+  --ring: #6b8aff;
   --chart-1: #FDB813;
-  --chart-2: #6B8AFF;
+  --chart-2: #6b8aff;
   --chart-3: #A78BFA;
   --chart-4: #4ADE80;
   --chart-5: #FB923C;
-  --sidebar: #0A0052;
-  --sidebar-foreground: #FAFAFA;
+  
+  --sidebar: #2a2a2c;
+  --sidebar-foreground: #fafafa;
   --sidebar-primary: #FDB813;
-  --sidebar-primary-foreground: #050038;
-  --sidebar-accent: #1A1A4A;
-  --sidebar-accent-foreground: #FAFAFA;
-  --sidebar-border: #2A2A5A;
-  --sidebar-ring: #FDB813;
-  --miro-navy: #050038;
-  --miro-blue: #6B8AFF;
-  --miro-purple: #A78BFA;
-  --ust-yellow: #FDB813;
-  --ust-yellow-light: #FFE066;
-  --ust-yellow-dark: #E5A50F;
+  --sidebar-primary-foreground: #1c1c1e;
+  --sidebar-accent: #3a3a3c;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #3a3a3c;
+  --sidebar-ring: #6b8aff;
+  
+  --miro-blue: #6b8aff;
+  --miro-blue-pressed: #4a6be0;
+  --miro-success: #4ADE80;
+  --miro-slate: #a0a0a5;
+  --miro-input-placeholder: #6a6a6f;
 }
 
 @layer base {
@@ -150,8 +178,95 @@
   }
 }
 
-/* Miro-style utility classes */
+/* Miro typography classes - matching DESIGN.md exactly */
 @layer utilities {
+  /* Display Hero: 56px, 400 weight, 1.15 line-height, -1.68px letter-spacing */
+  .text-display-hero {
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -1.68px;
+  }
+  
+  /* Section Heading: 48px, 400 weight, 1.15 line-height, -1.44px letter-spacing */
+  .text-section-heading {
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -1.44px;
+  }
+  
+  /* Card Title: 24px, 400 weight, 1.15 line-height, -0.72px letter-spacing */
+  .text-card-title {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.72px;
+  }
+  
+  /* Sub-heading: 22px, 400 weight, 1.35 line-height, -0.44px letter-spacing */
+  .text-sub-heading {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.44px;
+  }
+  
+  /* Feature text: 18px, 600 weight, 1.35 line-height */
+  .text-feature {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  
+  /* Body: 18px, 400 weight, 1.45 line-height */
+  .text-body-lg {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+  
+  /* Body Standard: 16px, 400-600 weight, 1.50 line-height, -0.16px letter-spacing */
+  .text-body {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.50;
+    letter-spacing: -0.16px;
+  }
+  
+  /* Button: 17.5px, 700 weight, 1.29 line-height, 0.175px letter-spacing */
+  .text-button {
+    font-size: 17.5px;
+    font-weight: 700;
+    line-height: 1.29;
+    letter-spacing: 0.175px;
+  }
+  
+  /* Caption: 14px, 400 weight, 1.71 line-height */
+  .text-caption {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.71;
+  }
+  
+  /* Small: 12px, 400 weight, 1.15 line-height, -0.36px letter-spacing */
+  .text-small {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.36px;
+  }
+  
+  /* Micro Uppercase: 10.5px, 400 weight, 0.90 line-height, uppercase */
+  .text-micro {
+    font-size: 10.5px;
+    font-weight: 400;
+    line-height: 0.90;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Gradient text utilities */
   .text-gradient-yellow {
     background: linear-gradient(135deg, #FDB813 0%, #FFE066 50%, #FDB813 100%);
     -webkit-background-clip: text;
@@ -160,38 +275,60 @@
   }
   
   .text-gradient-blue {
-    background: linear-gradient(135deg, #4262FF 0%, #8B5CF6 100%);
+    background: linear-gradient(135deg, #5b76fe 0%, #8B5CF6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
+  /* Miro shadow utilities */
+  .shadow-miro {
+    box-shadow: rgb(224, 226, 232) 0px 0px 0px 1px;
+  }
+  
+  .shadow-miro-hover {
+    box-shadow: rgb(224, 226, 232) 0px 0px 0px 1px, 
+                0 4px 16px -4px rgba(0, 0, 0, 0.08);
+  }
+  
+  .shadow-miro-elevated {
+    box-shadow: rgb(224, 226, 232) 0px 0px 0px 1px,
+                0 8px 24px -8px rgba(0, 0, 0, 0.12);
+  }
+  
+  .shadow-miro-yellow {
+    box-shadow: 0 4px 20px -4px rgba(253, 184, 19, 0.3), 
+                0 8px 32px -8px rgba(253, 184, 19, 0.2);
+  }
+  
+  .shadow-miro-lg {
+    box-shadow: 0 8px 40px -8px rgba(28, 28, 30, 0.15), 
+                0 16px 64px -16px rgba(28, 28, 30, 0.1);
+  }
+  
+  /* Background gradients */
   .bg-gradient-miro {
-    background: linear-gradient(135deg, #050038 0%, #0A0052 50%, #1A1A4A 100%);
+    background: linear-gradient(135deg, #1c1c1e 0%, #2a2a2c 50%, #3a3a3c 100%);
   }
   
   .bg-gradient-yellow {
     background: linear-gradient(135deg, #FDB813 0%, #FFE066 100%);
   }
   
-  .shadow-miro {
-    box-shadow: 0 4px 20px -4px rgba(5, 0, 56, 0.1), 0 8px 32px -8px rgba(5, 0, 56, 0.08);
-  }
-  
-  .shadow-miro-lg {
-    box-shadow: 0 8px 40px -8px rgba(5, 0, 56, 0.15), 0 16px 64px -16px rgba(5, 0, 56, 0.1);
-  }
-  
-  .shadow-miro-yellow {
-    box-shadow: 0 4px 20px -4px rgba(253, 184, 19, 0.3), 0 8px 32px -8px rgba(253, 184, 19, 0.2);
-  }
-  
   .border-gradient {
     border: 2px solid transparent;
     background: linear-gradient(white, white) padding-box, 
-                linear-gradient(135deg, #FDB813, #4262FF) border-box;
+                linear-gradient(135deg, #FDB813, #5b76fe) border-box;
   }
   
+  /* Pastel backgrounds */
+  .bg-miro-coral { background-color: #ffc6c6; }
+  .bg-miro-rose { background-color: #ffd8f4; }
+  .bg-miro-teal { background-color: #c3faf5; }
+  .bg-miro-orange { background-color: #ffe6cd; }
+  .bg-miro-pink { background-color: #fde0f0; }
+  
+  /* Animations */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }

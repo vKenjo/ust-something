@@ -20,7 +20,7 @@ import {
   getAchievableHonors,
   type CourseGrade,
 } from '@/lib/gwaPredictor';
-import { getSemestersUpTo, isProgramDataClean } from '@/lib/data/curricula';
+import { getSemestersUpTo } from '@/lib/data/curricula';
 import type { Course } from '@/lib/data/types';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -581,7 +581,6 @@ export default function GWACalculator() {
   // ─── Cumulative mode state ───
   const [semesterBlocks, setSemesterBlocks] = useState<SemesterBlock[]>([]);
   const [expandedSemesters, setExpandedSemesters] = useState<Set<string>>(new Set());
-  const [cumulativeDataBroken, setCumulativeDataBroken] = useState(false);
 
   // ─── Prediction mode state ───
   const [targetGWA, setTargetGWA] = useState<string>('1.75');
@@ -605,15 +604,12 @@ export default function GWACalculator() {
   const handleProgramSelected = useCallback((selection: ProgramSelection) => {
     if (mode !== 'cumulative') return;
 
-    const isBroken = !isProgramDataClean(selection.programSlug);
-    setCumulativeDataBroken(isBroken);
-
     const allSemesters = getSemestersUpTo(selection.programSlug, selection.year, selection.semester);
 
     const blocks: SemesterBlock[] = allSemesters.map((sem) => ({
       year: sem.year,
       term: sem.term,
-      label: sem.dataIsBroken ? `All Courses (${selection.programName})` : formatTermLabel(sem.year, sem.term),
+      label: formatTermLabel(sem.year, sem.term),
       grades: coursesToGradeEntries(sem.courses),
     }));
     setSemesterBlocks(blocks);
@@ -853,20 +849,6 @@ export default function GWACalculator() {
                       </span>
                     )}
                   </h3>
-
-                  {cumulativeDataBroken && semesterBlocks.length > 0 && (
-                    <div className="mb-4 p-3 rounded-xl bg-amber-50 border border-amber-200/60 flex items-start gap-2.5">
-                      <svg className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                      </svg>
-                      <div>
-                        <p className="text-sm font-semibold text-amber-800">Per-semester breakdown unavailable</p>
-                        <p className="text-xs mt-0.5 text-amber-600">
-                          Courses aren&apos;t properly split by semester in the source data. All unique courses are shown in one list. Your GWA calculation is still accurate.
-                        </p>
-                      </div>
-                    </div>
-                  )}
 
                   {semesterBlocks.length === 0 ? (
                     <div className="text-center py-12 border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50/50">

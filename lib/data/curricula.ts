@@ -13,51 +13,6 @@ import {
 
 const data = curriculaJson as CurriculaData;
 
-// ─── Data quality helpers ──────────────────────────────────────────────────
-// The scraper has a bug where many programs duplicate courses across semesters.
-// For example, Year 1 "first" semester might contain ALL courses from the entire
-// program (50-130 entries), repeated identically across every year. We detect
-// and fix this at the data-access layer.
-
-const MAX_REASONABLE_COURSES_PER_SEMESTER = 15;
-
-/**
- * Check if a program has broken/duplicated semester data.
- * Returns true when any single semester has an unreasonable number of courses.
- */
-export function isProgramDataClean(slug: string): boolean {
-  const program = getProgram(slug);
-  if (!program) return true;
-  for (const yl of program.curriculum) {
-    for (const sem of yl.semesters) {
-      if (sem.courses.length > MAX_REASONABLE_COURSES_PER_SEMESTER) return false;
-    }
-  }
-  return true;
-}
-
-/**
- * Get all unique courses for a program (deduplicated by course code).
- * Useful when per-semester data is unreliable.
- */
-export function getAllUniqueCourses(slug: string): Course[] {
-  const program = getProgram(slug);
-  if (!program) return [];
-  const seen = new Set<string>();
-  const result: Course[] = [];
-  for (const yl of program.curriculum) {
-    for (const sem of yl.semesters) {
-      for (const c of sem.courses) {
-        if (!seen.has(c.code)) {
-          seen.add(c.code);
-          result.push(c);
-        }
-      }
-    }
-  }
-  return result;
-}
-
 /**
  * Get all unique clusters from the curriculum data
  */
@@ -117,7 +72,6 @@ export function getProgram(slug: string): ProgramEntry | undefined {
 
 /**
  * Get courses for a specific year and semester of a program.
- * For programs with broken data, returns all unique courses (flat list).
  */
 export function getCoursesForSemester(
   slug: string,
@@ -126,11 +80,6 @@ export function getCoursesForSemester(
 ): Course[] {
   const program = getProgram(slug);
   if (!program) return [];
-
-  // If the data is broken, return the deduplicated course list
-  if (!isProgramDataClean(slug)) {
-    return getAllUniqueCourses(slug);
-  }
 
   const yearLevel = program.curriculum.find((y) => y.year === year);
   if (!yearLevel) return [];
@@ -174,6 +123,25 @@ export function hasData(): boolean {
 }
 
 /**
+ * Check if a program's curriculum data is complete (has valid courses).
+ * Some programs may have incomplete data due to scraping issues.
+ */
+export function isProgramDataClean(slug: string): boolean {
+  const program = getProgram(slug);
+  if (!program) return false;
+  
+  // Check if program has at least one semester with courses
+  for (const year of program.curriculum) {
+    for (const semester of year.semesters) {
+      if (semester.courses.length > 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+/**
  * Get all programs, optionally sorted by name
  */
 export function getAllPrograms(): ProgramEntry[] {
@@ -183,27 +151,14 @@ export function getAllPrograms(): ProgramEntry[] {
 /**
  * Get all semesters for a program up to (and including) the given year/term.
  * Returns them in chronological order.
- *
- * For programs with broken scraper data (duplicated courses across semesters),
- * returns a single entry with all unique courses.
  */
 export function getSemestersUpTo(
   slug: string,
   upToYear: number,
   upToTerm: 'first' | 'second' | 'summer'
-): { year: number; term: 'first' | 'second' | 'summer'; courses: Course[]; dataIsBroken?: boolean }[] {
+): { year: number; term: 'first' | 'second' | 'summer'; courses: Course[] }[] {
   const program = getProgram(slug);
   if (!program) return [];
-
-  // For programs with broken data, return a single flat block
-  if (!isProgramDataClean(slug)) {
-    return [{
-      year: 0, // signals "all"
-      term: 'first',
-      courses: getAllUniqueCourses(slug),
-      dataIsBroken: true,
-    }];
-  }
 
   const termOrder: Record<string, number> = { first: 0, second: 1, summer: 2 };
   const result: { year: number; term: 'first' | 'second' | 'summer'; courses: Course[] }[] = [];

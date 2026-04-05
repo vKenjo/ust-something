@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Inter as fallback for Roobert PRO (Miro's font)
+// Inter has similar geometric proportions and works well with negative letter-spacing
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -14,8 +17,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "UST Kit - Your Academic Companion",
-  description: "Calculate your GWA and sync your schedule to Google Calendar. For University of Santo Tomas students.",
+  title: "uste — Your Academic Companion",
+  description: "Calculate your GWA and sync your schedule to Google Calendar. Built for University of Santo Tomas students.",
+  keywords: ["UST", "GWA calculator", "schedule", "University of Santo Tomas", "Thomasian"],
+  authors: [{ name: "Kenjo" }],
+  openGraph: {
+    title: "uste — Your Academic Companion",
+    description: "Calculate your GWA and sync your schedule to Google Calendar.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -26,9 +36,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-sans">
         <Providers>{children}</Providers>
       </body>
     </html>

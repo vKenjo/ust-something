@@ -228,6 +228,9 @@ _No entries yet. Copilot will add discoveries here as development progresses._
 
 - ✅ **WORKS**: Utilizing Convex for high-frequency UI mutations and Supabase for reporting and blob storage. — _2026-04-02_
 - ✅ **WORKS**: Framer Motion integrates cleanly with Next.js 16 App Router when components are marked `'use client'`; animation variants centralized in `lib/animations.ts` keep pages DRY. — _2026-04-05, `ust-web/lib/animations.ts`, `ust-web/components/miro/*`_
+- ✅ **WORKS**: Miro design system can be replicated using CSS custom properties (design tokens) + Tailwind utility classes; typography classes like `.text-display-hero` encapsulate exact font-size/letter-spacing/line-height. — _2026-04-05, `app/globals.css`_
+- ✅ **WORKS**: Inter font is an excellent fallback for Roobert PRO; both have similar geometric proportions and work well with negative letter-spacing. — _2026-04-05, `app/layout.tsx`_
+- ✅ **WORKS**: Creating a component library under `components/miro/` with barrel exports (`index.ts`) enables clean imports (`import { MiroCard, GradientText } from '@/components/miro'`). — _2026-04-05, `ust-web/components/miro/index.ts`_
 - ⚠️ **GOTCHA**: Framer Motion `useInView` margin parameter requires literal type assertion (e.g., `margin: '-100px' as const`) or TypeScript will complain. — _2026-04-05, `ust-web/lib/animations.ts`_
 - ⚠️ **GOTCHA**: Framer Motion ease values need explicit `Easing` type import when used in transition objects to satisfy stricter TypeScript checking. — _2026-04-05, `ust-web/components/miro/FloatingElement.tsx`_
 - ✅ **WORKS**: Creating a component library under `components/miro/` with barrel exports (`index.ts`) enables clean imports (`import { MiroCard, GradientText } from '@/components/miro'`). — _2026-04-05, `ust-web/components/miro/index.ts`_
@@ -253,19 +256,25 @@ _No entries yet. Copilot will add discoveries here as development progresses._
 
 <!-- Copilot: OVERWRITE this section at the end of every session -->
 
-**Last updated**: _2026-04-04_
+**Last updated**: _2026-04-05_
 
-- **UST Curriculum Scraper implemented** — Auto-populate GWA calculator with program courses:
-  - Scraped **94 programs** from ust.edu.ph across 5 clusters (STEM, Health, ABM, HUMSS, MAD)
-  - **4.8MB curriculum data** stored in `lib/data/ust-curricula.json`
-  - New scraper module: `lib/scraper/` with types, parser, and scraping utilities
-  - Data store helpers: `lib/data/curricula.ts` for querying programs/courses
-- **GWA Calculator now has Quick Load feature** (`app/gwa/page.tsx`):
-  - New `ProgramSelector` component with cascading dropdowns
-  - Select Cluster → Program → Year → Semester to auto-load courses
-  - Courses marked with "From Curriculum" badge
-  - Manual entry still available for custom courses
-- **Validation completed**: 3/5 programs fully validated; known issues with MAD cluster parsing
+- **App rebranded to "uste"** (lowercase, modern):
+  - Updated metadata, layout, and all references from "UST Kit" to "uste"
+  - New logo styling with lowercase "u" in primary yellow
+- **Miro design system fully implemented**:
+  - Design tokens aligned with DESIGN.md (Miro Blue #5b76fe, ring shadows, exact typography)
+  - Typography hierarchy with negative letter-spacing classes (.text-display-hero, .text-section-heading, etc.)
+  - Inter font as Roobert PRO fallback
+- **New Miro component library** (`components/miro/`):
+  - `MiroHeader` - Sticky header with blur, navigation, CTAs
+  - `MiroHero` / `CanvasHero` - Hero sections with floating elements
+  - `MiroTrustBar` / `MiroTrustBadges` / `MiroSocialProof` - Trust sections
+  - `MiroFeatureTabs` / `FeatureShowcase` / `MiroFeatureGrid` - Feature displays
+  - `MiroTestimonials` / `FeaturedTestimonial` - Customer quotes
+  - `MiroFooter` / `MinimalFooter` - Multi-column footers
+- **Homepage redesigned** with full Miro-style layout:
+  - Header, Hero, Trust badges, Stats, Feature cards, Feature tabs, Feature grid, Testimonials, CTA, Footer
+- **Bug fix**: Added missing `isProgramDataClean` function and `cumulativeDataBroken` state to GWA page
 - Build and lint pass successfully
 
 ---
@@ -274,11 +283,12 @@ _No entries yet. Copilot will add discoveries here as development progresses._
 
 <!-- Copilot: OVERWRITE this section at the end of every session -->
 
-1. **Fix MAD cluster parsing** — Update scraper to handle Music/Arts programs with non-standard HTML tables; re-scrape affected programs.
-2. **Re-scrape Health programs** — Some programs missing later years; investigate curriculum page structure differences.
-3. **Add Formal Test Harness** — Introduce `npm test` (e.g., Vitest/Jest) and migrate current script-based checks into repeatable CI-friendly tests.
-4. **Add prefers-reduced-motion support** — Update `lib/animations.ts` to detect and disable animations for users who prefer reduced motion.
-5. **Implement OCR Input Path** — Wire screenshot upload + OCR extraction into the schedule parser UI flow with correction UX.
+1. **Apply Miro styling to GWA and Schedule pages** — Port header/footer components and update page layouts to match homepage design.
+2. **Polish dark mode** — Verify all new Miro components render correctly in dark mode; adjust color tokens if needed.
+3. **Fix MAD cluster parsing** — Update scraper to handle Music/Arts programs with non-standard HTML tables.
+4. **Re-scrape Health programs** — Some programs missing later years; investigate curriculum page structure.
+5. **Add Formal Test Harness** — Introduce `npm test` (e.g., Vitest/Jest).
+6. **Implement OCR Input Path** — Wire screenshot upload + OCR extraction into schedule parser UI.
 
 ---
 
