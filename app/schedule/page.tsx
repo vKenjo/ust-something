@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { parseSchedule, type ScheduleEntry } from '@/lib/scheduleParser';
 import {
   scheduleToEvents,
-  getFirstEventGoogleLink,
+  generateAllGoogleCalendarURLs,
   generateICS,
   downloadICS,
   type SemesterType,
@@ -119,7 +119,12 @@ export default function SchedulePage() {
   const [editableEntries, setEditableEntries] = useState<EditableScheduleEntry[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
   const [isProcessed, setIsProcessed] = useState(false);
-  const [googleCalendarLink, setGoogleCalendarLink] = useState<string | null>(null);
+  
+  // Multi-event Google Calendar state
+  const [isAddingToGoogleCalendar, setIsAddingToGoogleCalendar] = useState(false);
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
+  const [totalEvents, setTotalEvents] = useState(0);
+  const [isCancelled, setIsCancelled] = useState(false);
 
   const currentStep = isProcessed && editableEntries.length > 0 ? 3 : isProcessed ? 2 : scheduleText.trim() ? 2 : 1;
 
@@ -129,7 +134,6 @@ export default function SchedulePage() {
 
     if (parsed.entries.length === 0) {
       setEditableEntries([]);
-      setGoogleCalendarLink(null);
       setIsProcessed(true);
       return;
     }
@@ -143,7 +147,6 @@ export default function SchedulePage() {
     }));
 
     setEditableEntries(editable);
-    setGoogleCalendarLink(null);
     setIsProcessed(true);
   };
 
@@ -170,9 +173,49 @@ export default function SchedulePage() {
     downloadICS(icsContent, `ust-schedule-${semester.toLowerCase()}-${schoolYear}.ics`);
   };
 
-  const handleGenerateGoogleLink = () => {
+  const handleAddAllToGoogleCalendar = async () => {
     const events = buildEventsFromEntries();
-    setGoogleCalendarLink(getFirstEventGoogleLink(events));
+    const urls = generateAllGoogleCalendarURLs(events);
+    
+    if (urls.length === 0) return;
+    
+    setIsAddingToGoogleCalendar(true);
+    setIsCancelled(false);
+    setTotalEvents(urls.length);
+    setCurrentEventIndex(0);
+    
+    for (let i = 0; i < urls.length; i++) {
+      if (isCancelled) {
+        break;
+      }
+      
+      setCurrentEventIndex(i + 1);
+      
+      // Open the Google Calendar link in a new tab
+      const opened = window.open(urls[i], '_blank');
+      
+      // Check if popup was blocked
+      if (!opened || opened.closed || typeof opened.closed === 'undefined') {
+        alert('Popup blocker detected! Please allow popups for this site to add all events to Google Calendar.');
+        break;
+      }
+      
+      // Wait 1 second before opening the next link (except for the last one)
+      if (i < urls.length - 1) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+    }
+    
+    setIsAddingToGoogleCalendar(false);
+    setCurrentEventIndex(0);
+    setTotalEvents(0);
+  };
+  
+  const handleCancelGoogleCalendarAdd = () => {
+    setIsCancelled(true);
+    setIsAddingToGoogleCalendar(false);
+    setCurrentEventIndex(0);
+    setTotalEvents(0);
   };
 
   const handleUpdateEntry = (id: string, updates: Partial<EditableScheduleEntry>) => {
@@ -201,7 +244,6 @@ W 04:00pm - 06:00pm 19 Flr. Rm. 1909 BLESSED PIER GIORGIO FRASSATI BUILDING`;
     setEditableEntries([]);
     setErrors([]);
     setIsProcessed(false);
-    setGoogleCalendarLink(null);
   };
 
   return (
@@ -555,41 +597,52 @@ W 04:00pm - 06:00pm 19 Flr. Rm. 1909 BLESSED PIER GIORGIO FRASSATI BUILDING`;
                       initial="rest"
                       whileHover="hover"
                       whileTap="tap"
-                      onClick={handleGenerateGoogleLink}
-                      className="px-8 py-4 bg-primary text-primary-foreground rounded-xl text-lg font-bold shadow-miro-yellow hover:shadow-lg transition-all"
+                      onClick={handleAddAllToGoogleCalendar}
+                      disabled={isAddingToGoogleCalendar}
+                      className={`px-8 py-4 rounded-xl text-lg font-bold shadow-miro-yellow hover:shadow-lg transition-all ${
+                        isAddingToGoogleCalendar
+                          ? 'bg-primary/50 text-primary-foreground/50 cursor-not-allowed'
+                          : 'bg-primary text-primary-foreground'
+                      }`}
                     >
-                      🔗 Google Calendar Link
+                      🔗 Add All to Google Calendar
                     </motion.button>
                   </div>
 
                   <AnimatePresence>
-                    {googleCalendarLink && (
+                    {isAddingToGoogleCalendar && (
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
                         className="w-full max-w-xl"
                       >
-                        <div className="rounded-xl border-2 border-primary/30 bg-primary/5 p-4 text-sm">
-                          <p className="font-semibold text-foreground mb-1">Google Calendar Link (first class)</p>
-                          <p className="text-muted-foreground text-xs mb-2">
-                            Use this quick link for a single event, or download ICS for your full schedule.
+                        <div className="rounded-xl border-2 border-primary/30 bg-primary/5 p-4 text-sm text-center">
+                          <p className="font-semibold text-foreground mb-2">
+                            Opening event {currentEventIndex} of {totalEvents}...
                           </p>
-                          <a
-                            href={googleCalendarLink}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="block break-all text-secondary hover:underline"
+                          <motion.button
+                            variants={buttonPress}
+                            initial="rest"
+                            whileHover="hover"
+                            whileTap="tap"
+                            onClick={handleCancelGoogleCalendarAdd}
+                            className="px-4 py-2 bg-destructive/10 text-destructive rounded-lg font-medium hover:bg-destructive/20 transition-colors"
                           >
-                            {googleCalendarLink}
-                          </a>
+                            Cancel
+                          </motion.button>
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
 
                   <p className="text-sm text-muted-foreground text-center max-w-md">
-                    ICS includes reminders, notes, recurrence, and calendar categories for color grouping in supporting apps.
+                    <strong>Recommended:</strong> Download the ICS file for the most reliable way to add all events at once. 
+                    The Google Calendar button opens multiple tabs (one per event) with a 1-second delay.
+                    <br />
+                    <span className="text-xs mt-1 block">
+                      💡 Make sure to allow popups for this site if using the Google Calendar option.
+                    </span>
                   </p>
                 </div>
               </MiroCard>

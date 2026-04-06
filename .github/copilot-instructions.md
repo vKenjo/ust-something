@@ -238,6 +238,8 @@ _No entries yet. Copilot will add discoveries here as development progresses._
 - ⚠️ **GOTCHA**: MAD cluster (Music/Arts) programs have non-standard table HTML that causes course merging issues; parser stops at wrong curriculum boundaries. — _2026-04-04, `ust-web/lib/data/VALIDATION.md`_
 - ⚠️ **GOTCHA**: Some Health programs (e.g., Nursing) span curriculum tables across multiple page sections; scraper only captures first 2 years. — _2026-04-04, `ust-web/lib/data/VALIDATION.md`_
 - ✅ **WORKS**: Cascading dropdown UI (cluster→program→year→semester) provides good UX for curriculum selection; reset dependent values when parent changes. — _2026-04-04, `ust-web/components/ProgramSelector.tsx`_
+- ✅ **WORKS**: Google Calendar template URLs (`action=TEMPLATE`) can only create one event at a time, but sequential `window.open()` calls with 1s delays can add multiple events without triggering popup blockers. — _2026-04-05, `ust-web/app/schedule/page.tsx`, `ust-web/lib/calendarGenerator.ts`_
+- ✅ **WORKS**: Using async/await with `setTimeout` in a for-loop provides clean sequential link opening with delays; cancel functionality via state flag. — _2026-04-05, `ust-web/app/schedule/page.tsx`_
 
 ---
 
@@ -258,24 +260,21 @@ _No entries yet. Copilot will add discoveries here as development progresses._
 
 **Last updated**: _2026-04-05_
 
-- **App rebranded to "uste"** (lowercase, modern):
-  - Updated metadata, layout, and all references from "UST Kit" to "uste"
-  - New logo styling with lowercase "u" in primary yellow
-- **Miro design system fully implemented**:
-  - Design tokens aligned with DESIGN.md (Miro Blue #5b76fe, ring shadows, exact typography)
-  - Typography hierarchy with negative letter-spacing classes (.text-display-hero, .text-section-heading, etc.)
-  - Inter font as Roobert PRO fallback
-- **New Miro component library** (`components/miro/`):
-  - `MiroHeader` - Sticky header with blur, navigation, CTAs
-  - `MiroHero` / `CanvasHero` - Hero sections with floating elements
-  - `MiroTrustBar` / `MiroTrustBadges` / `MiroSocialProof` - Trust sections
-  - `MiroFeatureTabs` / `FeatureShowcase` / `MiroFeatureGrid` - Feature displays
-  - `MiroTestimonials` / `FeaturedTestimonial` - Customer quotes
-  - `MiroFooter` / `MinimalFooter` - Multi-column footers
-- **Homepage redesigned** with full Miro-style layout:
-  - Header, Hero, Trust badges, Stats, Feature cards, Feature tabs, Feature grid, Testimonials, CTA, Footer
-- **Bug fix**: Added missing `isProgramDataClean` function and `cumulativeDataBroken` state to GWA page
-- Build and lint pass successfully
+- **Multi-event Google Calendar export implemented**:
+  - New `generateAllGoogleCalendarURLs()` utility generates individual Google Calendar links for all events
+  - `handleAddAllToGoogleCalendar()` opens links sequentially with 1-second delays
+  - Inline progress indicator shows "Opening event X of Y..."
+  - Cancel button allows stopping mid-operation
+  - Popup blocker detection with user-friendly alert
+- **Schedule page improvements**:
+  - Replaced "Google Calendar Link (first class)" with "Add All to Google Calendar" button
+  - Updated help text to recommend ICS download as primary method
+  - Clear messaging about popup blocker requirements
+  - Removed unused state variables (`googleCalendarLink`, `handleGenerateGoogleLink`)
+- **Build and lint verification**:
+  - TypeScript compilation passes
+  - No new lint errors introduced
+  - Pre-existing lint errors remain in other files (unrelated)
 
 ---
 
@@ -285,10 +284,11 @@ _No entries yet. Copilot will add discoveries here as development progresses._
 
 1. **Apply Miro styling to GWA and Schedule pages** — Port header/footer components and update page layouts to match homepage design.
 2. **Polish dark mode** — Verify all new Miro components render correctly in dark mode; adjust color tokens if needed.
-3. **Fix MAD cluster parsing** — Update scraper to handle Music/Arts programs with non-standard HTML tables.
-4. **Re-scrape Health programs** — Some programs missing later years; investigate curriculum page structure.
-5. **Add Formal Test Harness** — Introduce `npm test` (e.g., Vitest/Jest).
-6. **Implement OCR Input Path** — Wire screenshot upload + OCR extraction into schedule parser UI.
+3. **User testing for multi-event calendar export** — Test with real users to validate UX and identify edge cases.
+4. **Fix MAD cluster parsing** — Update scraper to handle Music/Arts programs with non-standard HTML tables.
+5. **Re-scrape Health programs** — Some programs missing later years; investigate curriculum page structure.
+6. **Add Formal Test Harness** — Introduce `npm test` (e.g., Vitest/Jest).
+7. **Implement OCR Input Path** — Wire screenshot upload + OCR extraction into schedule parser UI.
 
 ---
 

@@ -257,6 +257,14 @@ export function downloadICS(icsContent: string, filename: string = 'ust-schedule
 }
 
 /**
+ * Generate Google Calendar URLs for all events
+ * Returns an array of URLs that can be opened sequentially
+ */
+export function generateAllGoogleCalendarURLs(events: CalendarEvent[]): string[] {
+  return events.map((event) => generateGoogleCalendarURL(event));
+}
+
+/**
  * Get shareable calendar link (for the first event as example)
  * For multiple events, use ICS download instead
  */
