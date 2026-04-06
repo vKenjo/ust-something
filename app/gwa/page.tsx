@@ -20,7 +20,7 @@ import {
   getAchievableHonors,
   type CourseGrade,
 } from '@/lib/gwaPredictor';
-import { getSemestersUpTo } from '@/lib/data/curricula';
+import { getSemestersUpTo, isProgramDataClean } from '@/lib/data/curricula';
 import type { Course } from '@/lib/data/types';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -417,17 +417,17 @@ function SemesterBlockUI({
 // ─────────────────────────────────────────────────────────────────────────────
 
 function ModeSelector({ mode, onChange }: { mode: CalculationMode; onChange: (m: CalculationMode) => void }) {
-  const modes: { key: CalculationMode; label: string; desc: string; icon: React.ReactNode }[] = [
+  const modes: { key: CalculationMode; label: string; desc: string; icon: React.ReactNode; isBeta?: boolean }[] = [
     {
       key: 'semester', label: 'This Semester', desc: 'Single semester GWA',
       icon: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
     },
     {
-      key: 'cumulative', label: 'Cumulative', desc: 'Track all semesters',
+      key: 'cumulative', label: 'Cumulative', desc: 'Track all semesters', isBeta: true,
       icon: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
     },
     {
-      key: 'prediction', label: 'Prediction', desc: 'What grades do I need?',
+      key: 'prediction', label: 'Prediction', desc: 'What grades do I need?', isBeta: true,
       icon: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" /></svg>
     },
   ];
@@ -448,6 +448,11 @@ function ModeSelector({ mode, onChange }: { mode: CalculationMode; onChange: (m:
               className="absolute inset-0 bg-white rounded-xl shadow-miro"
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
             />
+          )}
+          {m.isBeta && (
+            <span className="absolute top-1 right-1 z-20 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide bg-amber-100 text-amber-700 rounded-md border border-amber-200">
+              Beta
+            </span>
           )}
           <div className="relative z-10 flex flex-col items-center gap-1.5">
             <span className={`transition-colors ${mode === m.key ? 'text-primary' : ''}`}>{m.icon}</span>
@@ -581,6 +586,7 @@ export default function GWACalculator() {
   // ─── Cumulative mode state ───
   const [semesterBlocks, setSemesterBlocks] = useState<SemesterBlock[]>([]);
   const [expandedSemesters, setExpandedSemesters] = useState<Set<string>>(new Set());
+  const [dataQualityWarning, setDataQualityWarning] = useState<string | null>(null);
 
   // ─── Prediction mode state ───
   const [targetGWA, setTargetGWA] = useState<string>('1.75');
@@ -604,6 +610,13 @@ export default function GWACalculator() {
   const handleProgramSelected = useCallback((selection: ProgramSelection) => {
     if (mode !== 'cumulative') return;
 
+    // Check data quality
+    if (!isProgramDataClean(selection.programSlug)) {
+      setDataQualityWarning('This program may have incomplete curriculum data. GWA calculations might be inaccurate.');
+    } else {
+      setDataQualityWarning(null);
+    }
+
     const allSemesters = getSemestersUpTo(selection.programSlug, selection.year, selection.semester);
 
     const blocks: SemesterBlock[] = allSemesters.map((sem) => ({
@@ -613,6 +626,11 @@ export default function GWACalculator() {
       grades: coursesToGradeEntries(sem.courses),
     }));
     setSemesterBlocks(blocks);
+
+    // Warn if no semesters were loaded
+    if (blocks.length === 0) {
+      setDataQualityWarning('No curriculum data available for this program and semester selection.');
+    }
 
     if (blocks.length > 0) {
       const lastKey = `${blocks[blocks.length - 1].year}-${blocks[blocks.length - 1].term}`;
@@ -849,6 +867,16 @@ export default function GWACalculator() {
                       </span>
                     )}
                   </h3>
+
+                  {/* Data quality warning */}
+                  {dataQualityWarning && (
+                    <div className="mb-4 p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-2">
+                      <svg className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                      </svg>
+                      <p className="text-sm text-amber-700">{dataQualityWarning}</p>
+                    </div>
+                  )}
 
                   {semesterBlocks.length === 0 ? (
                     <div className="text-center py-12 border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50/50">
