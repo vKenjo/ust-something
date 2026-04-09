@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const data = require\\(''./lib/data/ust-curricula.json''\\); const colleges = [...new Set\\(data.programs.map\\(p => p.college\\)\\)]; colleges.sort\\(\\); colleges.forEach\\(c => console.log\\(c\\)\\)\")",
+      "Bash(node -e \":*)",
+      "Bash(npx tsx:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx next:*)",
+      "Bash(grep -r \"tailwind\\\\|@theme\" /Users/kenjo/Projects/ust-kit --include=*.ts --include=*.tsx --include=*.js --include=*.mjs)",
+      "Bash(npx eslint:*)",
+      "Bash(git:*)",
+      "WebFetch(domain:www.ust.edu.ph)",
+      "WebSearch",
+      "WebFetch(domain:medicine.ust.edu.ph)",
+      "WebFetch(domain:medadmission.ust.edu.ph)",
+      "WebFetch(domain:www.wikidoc.org)",
+      "Bash(python3 -c \"import PyPDF2; print\\(''available''\\)\")",
+      "Bash(python3 -c \"import pdfminer; print\\(''available''\\)\")",
+      "Bash(pip3 install:*)",
+      "Bash(python3 -c \":*)",
+      "Bash(python3:*)",
+      "Bash(brew install:*)",
+      "Bash(pdftotext \"/Users/kenjo/.claude/projects/-Users-kenjo-Projects-ust-kit/91462a4c-5311-49ee-89f8-b8ada9326a48/tool-results/webfetch-1775404379742-2uinbm.pdf\" -)",
+      "Bash(pdftotext \"/Users/kenjo/.claude/projects/-Users-kenjo-Projects-ust-kit/91462a4c-5311-49ee-89f8-b8ada9326a48/tool-results/webfetch-1775404381023-b1r7bw.pdf\" -)",
+      "Bash(pdftotext \"/Users/kenjo/.claude/projects/-Users-kenjo-Projects-ust-kit/91462a4c-5311-49ee-89f8-b8ada9326a48/tool-results/webfetch-1775404391197-f0k2m0.pdf\" -)",
+      "Bash(pdftotext:*)",
+      "Bash(node:*)"
+    ]
+  }
+}
