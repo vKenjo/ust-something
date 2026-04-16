@@ -1,14 +1,15 @@
 /**
- * Bulk UST Curriculum Scraper
- * Scrapes curriculum data from all UST bachelor's programs
+ * Bulk UST Curriculum Scraper (Puppeteer)
+ *
+ * Scrapes curriculum data from all UST bachelor's programs using
+ * headless Chromium for proper JS-rendered content extraction.
+ *
+ * Run: npx tsx lib/scraper/scrape-all-puppeteer.ts
  */
 
-import { scrapeProgramCurriculum } from './ustCurriculumScraper';
+import { launchBrowser, scrapeProgramWithPuppeteer } from './puppeteerScraper';
 import programsData from '../data/ust-programs.json';
-import {
-  resolveCollege,
-  UST_COLLEGES,
-} from '../collegeMapping';
+import { resolveCollege, UST_COLLEGES } from '../collegeMapping';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -41,7 +42,7 @@ interface ScrapeResult {
   errors: ScrapeError[];
 }
 
-const DELAY_MS = 1500; // 1.5 seconds between requests
+const DELAY_MS = 2000; // 2 seconds between requests
 
 function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -50,10 +51,19 @@ function sleep(ms: number): Promise<void> {
 async function scrapeAllPrograms(): Promise<void> {
   const programs = programsData.programs as ProgramEntry[];
   const totalPrograms = programs.length;
-  
-  console.log(`\n🎓 UST Curriculum Scraper`);
-  console.log(`========================`);
+
+  console.log(`\n🎓 UST Curriculum Scraper (Puppeteer)`);
+  console.log(`======================================`);
   console.log(`Starting scrape of ${totalPrograms} programs...\n`);
+
+  const browser = await launchBrowser();
+  const page = await browser.newPage();
+
+  // Set a reasonable viewport and user agent
+  await page.setViewport({ width: 1280, height: 800 });
+  await page.setUserAgent(
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+  );
 
   const result: ScrapeResult = {
     generatedAt: new Date().toISOString(),
@@ -66,18 +76,15 @@ async function scrapeAllPrograms(): Promise<void> {
   for (let i = 0; i < programs.length; i++) {
     const program = programs[i];
     const progress = `[${i + 1}/${totalPrograms}]`;
-    
+
     try {
       console.log(`${progress} Scraping: ${program.name}...`);
-      
-      const scraped = await scrapeProgramCurriculum(program.url);
 
-      // Keep source-of-truth program identity from ust-programs.json.
-      // Only curriculum content is taken from page scraping.
+      const scraped = await scrapeProgramWithPuppeteer(page, program.url);
+
       const collegeKey = resolveCollege(program.name);
-      const collegeName = UST_COLLEGES[collegeKey]?.name ?? scraped.college;
-      
-      // Merge scraped curriculum with canonical metadata from source.
+      const collegeName = UST_COLLEGES[collegeKey]?.name ?? 'Unknown College';
+
       result.programs.push({
         name: program.name,
         slug: program.slug,
@@ -85,53 +92,74 @@ async function scrapeAllPrograms(): Promise<void> {
         cluster: program.cluster,
         curriculum: scraped.curriculum,
       });
-      
+
       result.successfulScrapes++;
-      
-      const courseCount = scraped.curriculum.reduce((acc, year) => {
-        return acc + year.semesters.reduce((semAcc, sem) => semAcc + sem.courses.length, 0);
-      }, 0);
-      
-      console.log(`  ✅ Success: ${scraped.curriculum.length} year levels, ${courseCount} courses`);
-      
+
+      const courseCount = scraped.curriculum.reduce(
+        (acc: number, year: { semesters: { courses: unknown[] }[] }) =>
+          acc + year.semesters.reduce((semAcc: number, sem: { courses: unknown[] }) => semAcc + sem.courses.length, 0),
+        0
+      );
+      const yearCount = scraped.curriculum.length;
+
+      if (courseCount === 0) {
+        console.log(`  ⚠️  0 courses found (page may have different structure)`);
+      } else {
+        console.log(`  ✅ ${yearCount} years, ${courseCount} courses`);
+      }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
-      console.log(`  ❌ Failed: ${errorMessage}`);
-      
+      const shortError = errorMessage.includes('timeout')
+        ? 'Navigation timeout'
+        : errorMessage.substring(0, 80);
+      console.log(`  ❌ ${shortError}`);
+
       result.errors.push({
         slug: program.slug,
         name: program.name,
         error: errorMessage,
       });
     }
-    
-    // Add delay between requests to be respectful to the server
+
+    // Delay between requests
     if (i < programs.length - 1) {
       await sleep(DELAY_MS);
     }
   }
 
-  // Save results to file
+  await browser.close();
+
+  // Save results
   const outputPath = path.join(__dirname, '../data/ust-curricula.json');
   fs.writeFileSync(outputPath, JSON.stringify(result, null, 2), 'utf-8');
-  
-  console.log(`\n========================`);
+
+  console.log(`\n======================================`);
   console.log(`📊 Scrape Complete!`);
-  console.log(`========================`);
+  console.log(`======================================`);
   console.log(`Total programs: ${totalPrograms}`);
   console.log(`Successful: ${result.successfulScrapes}`);
   console.log(`Failed: ${result.errors.length}`);
   console.log(`\nResults saved to: ${outputPath}`);
-  
+
   if (result.errors.length > 0) {
     console.log(`\n⚠️ Failed programs:`);
     result.errors.forEach(err => {
-      console.log(`  - ${err.name}: ${err.error}`);
+      console.log(`  - ${err.name}: ${err.error.substring(0, 80)}`);
     });
+  }
+
+  // Report programs with 0 courses
+  const emptyPrograms = result.programs.filter(
+    p => (p.curriculum as { semesters: { courses: unknown[] }[] }[]).reduce(
+      (a, y) => a + y.semesters.reduce((b, s) => b + s.courses.length, 0), 0
+    ) === 0
+  );
+  if (emptyPrograms.length > 0) {
+    console.log(`\n⚠️ Programs with 0 courses (need manual review):`);
+    emptyPrograms.forEach(p => console.log(`  - ${p.name}`));
   }
 }
 
-// Run the scraper
 scrapeAllPrograms().catch(error => {
   console.error('Fatal error:', error);
   process.exit(1);

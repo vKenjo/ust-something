@@ -8,7 +8,10 @@
     "dev:convex": "convex dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate:data": "npx --yes tsx lib/data/validate-program-ownership.ts",
+    "scrape": "npx --yes tsx lib/scraper/scrape-all-puppeteer.ts",
+    "scrape:fix": "npx --yes tsx lib/data/fix-medicine-pharmacy.ts"
   },
   "dependencies": {
     "cheerio": "^1.2.0",

@@ -8,10 +8,29 @@ import curriculaJson from './ust-curricula.json';
 import {
   UST_COLLEGES,
   resolveCollege,
+  resolveCollegeByName,
   type CollegeInfo,
 } from '../collegeMapping';
 
 const data = curriculaJson as CurriculaData;
+
+const PROGRAM_COLLEGE_KEY_OVERRIDES: [RegExp, string][] = [
+  [/^Bachelor of Science in Accountancy$/i, 'ACCOUNTANCY'],
+];
+
+function resolveProgramCollegeKey(program: ProgramEntry): string {
+  for (const [pattern, collegeKey] of PROGRAM_COLLEGE_KEY_OVERRIDES) {
+    if (pattern.test(program.name)) {
+      return collegeKey;
+    }
+  }
+
+  return resolveCollegeByName(program.college) ?? resolveCollege(program.name);
+}
+
+function resolveRequestedCollegeKey(college: string): string | null {
+  return resolveCollegeByName(college);
+}
 
 /**
  * Get all unique clusters from the curriculum data
@@ -36,7 +55,7 @@ export function getColleges(): CollegeInfo[] {
   const result: CollegeInfo[] = [];
 
   for (const p of data.programs) {
-    const key = resolveCollege(p.name);
+    const key = resolveProgramCollegeKey(p);
     if (!seen.has(key)) {
       seen.add(key);
       const info = UST_COLLEGES[key];
@@ -51,16 +70,24 @@ export function getColleges(): CollegeInfo[] {
  * Get all programs belonging to a specific college (by full name or short name).
  */
 export function getProgramsByCollege(college: string): ProgramEntry[] {
-  return data.programs.filter((p) => {
-    const key = resolveCollege(p.name);
-    const info = UST_COLLEGES[key];
-    return (
-      info &&
-      (info.name === college ||
-        info.shortName === college ||
-        p.college === college)
-    );
-  });
+  const targetKey = resolveRequestedCollegeKey(college);
+  if (!targetKey) return [];
+
+  const seenNames = new Set<string>();
+  const result: ProgramEntry[] = [];
+
+  for (const program of data.programs) {
+    const programKey = resolveProgramCollegeKey(program);
+    if (programKey !== targetKey) continue;
+
+    // De-duplicate accidental duplicate entries from data source drift.
+    const nameKey = program.name.trim().toLowerCase();
+    if (seenNames.has(nameKey)) continue;
+    seenNames.add(nameKey);
+    result.push(program);
+  }
+
+  return result.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**

@@ -457,8 +457,9 @@ function extractCollegeName(html: string, url: string): string {
  * Generate slug from URL
  */
 function generateSlug(url: string): string {
-  const match = url.match(/\/programs\/([^/]+)\/?$/);
-  return match ? match[1] : 'unknown-program';
+  const cleanUrl = url.split('?')[0].split('#')[0];
+  const segments = cleanUrl.split('/').filter(Boolean);
+  return segments[segments.length - 1] ?? 'unknown-program';
 }
 
 /**

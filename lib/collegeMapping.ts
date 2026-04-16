@@ -2,8 +2,8 @@
  * UST College → Program Mapping
  *
  * The scraped college names are malformed (HTML entities, truncated text).
- * This file provides a manual, authoritative mapping of every undergraduate
- * program to its correct college/faculty/institute at UST.
+ * This file provides a manual, authoritative mapping of degree programs
+ * to their correct college/faculty/institute at UST.
  */
 
 export interface CollegeInfo {
@@ -13,9 +13,14 @@ export interface CollegeInfo {
 }
 
 /**
- * All UST colleges/faculties/institutes that offer undergraduate programs.
+ * UST colleges/faculties/institutes represented in app program data.
  */
 export const UST_COLLEGES: Record<string, CollegeInfo> = {
+  ACCOUNTANCY: {
+    name: 'UST-Alfredo M. Velayo College of Accountancy',
+    shortName: 'AMV-CA',
+    category: 'college',
+  },
   CICS: {
     name: 'College of Information and Computing Sciences',
     shortName: 'CICS',
@@ -101,7 +106,6 @@ const PROGRAM_TO_COLLEGE_RULES: [RegExp, string][] = [
   // College of Science
   [/Applied Mathematics/, 'COS'],
   [/Actuarial Science/, 'COS'],
-  [/Biochemistry/, 'COS'],
   [/Biology/, 'COS'],
   [/Chemistry/, 'COS'],
   [/Applied Physics/, 'COS'],
@@ -132,7 +136,7 @@ const PROGRAM_TO_COLLEGE_RULES: [RegExp, string][] = [
   [/Tourism Management/, 'TOURISM'],
 
   // Commerce (Business Administration before Economics to avoid "Business Economics" misroute)
-  [/Accountancy/, 'COMMERCE'],
+  [/Accountancy/, 'ACCOUNTANCY'],
   [/Accounting Information/, 'COMMERCE'],
   [/Business Administration/, 'COMMERCE'],
   [/Entrepreneurship/, 'COMMERCE'],
@@ -165,6 +169,8 @@ const PROGRAM_TO_COLLEGE_RULES: [RegExp, string][] = [
   [/Nursing/, 'NURSING'],
 
   // Pharmacy
+  [/Biochemistry/, 'PHARMACY'],
+  [/Medical Technology/, 'PHARMACY'],
   [/Pharmacy/, 'PHARMACY'],
 
   // Rehabilitation Sciences
@@ -173,9 +179,33 @@ const PROGRAM_TO_COLLEGE_RULES: [RegExp, string][] = [
   [/Speech-Language Pathology/, 'REHAB_SCIENCES'],
 
   // Medicine
-  [/Medical Technology/, 'MEDICINE'],
   [/Basic Human Studies/, 'MEDICINE'],
+  [/Doctor of Medicine/, 'MEDICINE'],
 ];
+
+function normalizeCollegeName(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+const BASE_COLLEGE_ALIASES: Record<string, string> = Object.entries(
+  UST_COLLEGES
+).reduce((aliases, [key, info]) => {
+  aliases[normalizeCollegeName(info.name)] = key;
+  aliases[normalizeCollegeName(info.shortName)] = key;
+  aliases[normalizeCollegeName(key)] = key;
+  return aliases;
+}, {} as Record<string, string>);
+
+const COLLEGE_NAME_ALIASES: Record<string, string> = {
+  ...BASE_COLLEGE_ALIASES,
+  'college of accountancy': 'ACCOUNTANCY',
+  'alfredo m velayo college of accountancy': 'ACCOUNTANCY',
+  'college of commerce': 'COMMERCE',
+};
 
 /**
  * Resolve the correct college key for a given program name.
@@ -187,6 +217,30 @@ export function resolveCollege(programName: string): string {
     }
   }
   return 'COS'; // Fallback
+}
+
+/**
+ * Resolve the correct college key from a college/faculty/institute name.
+ * Returns null when no reliable match is found.
+ */
+export function resolveCollegeByName(
+  collegeName: string | null | undefined
+): string | null {
+  if (!collegeName) return null;
+  const normalized = normalizeCollegeName(collegeName);
+  if (!normalized) return null;
+
+  if (COLLEGE_NAME_ALIASES[normalized]) {
+    return COLLEGE_NAME_ALIASES[normalized];
+  }
+
+  for (const [alias, key] of Object.entries(COLLEGE_NAME_ALIASES)) {
+    if (alias.length >= 8 && normalized.includes(alias)) {
+      return key;
+    }
+  }
+
+  return null;
 }
 
 /**

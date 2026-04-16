@@ -31,12 +31,6 @@
       "cluster": "STEM"
     },
     {
-      "name": "Bachelor of Science in Biology major in Industrial Biology",
-      "slug": "bachelor-of-science-in-biology-major-in-industrial-biology",
-      "url": "https://www.ust.edu.ph/bachelor-of-science-in-biology-major-in-industrial-biology/",
-      "cluster": "STEM"
-    },
-    {
       "name": "Bachelor of Science in Biology major in Medical Biology",
       "slug": "bachelor-of-science-in-biology-major-in-medical-biology",
       "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-biology-major-in-medical-biology/",
@@ -136,6 +130,12 @@
       "name": "Bachelor of Science in Pharmacy major in Clinical Pharmacy",
       "slug": "bachelor-of-science-in-pharmacy-major-in-clinical-pharmacy",
       "url": "https://www.ust.edu.ph/academics/programs/bachelor-of-science-in-pharmacy-major-in-clinical-pharmacy/",
+      "cluster": "Health"
+    },
+    {
+      "name": "Doctor of Medicine",
+      "slug": "doctor-of-medicine",
+      "url": "https://www.ust.edu.ph/academics/programs/doctor-of-medicine/",
       "cluster": "Health"
     },
     {
@@ -433,12 +433,6 @@
       "cluster": "MAD"
     },
     {
-      "name": "Bachelor of Music in Performance major in Contra Bass",
-      "slug": "bachelor-of-music-in-performance-major-in-contra-bass",
-      "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-contra-bass/",
-      "cluster": "MAD"
-    },
-    {
       "name": "Bachelor of Music in Performance major in Flute",
       "slug": "bachelor-of-music-in-performance-major-in-flute",
       "url": "https://www.ust.edu.ph/bachelor-of-music-in-performance-major-in-flute/",
@@ -487,21 +481,9 @@
       "cluster": "MAD"
     },
     {
-      "name": "Bachelor of Music major in Music Literature",
-      "slug": "bachelor-of-music-major-in-music-literature",
-      "url": "https://www.ust.edu.ph/bachelor-of-music-major-in-music-literature/",
-      "cluster": "MAD"
-    },
-    {
       "name": "Bachelor of Music in Music Theatre",
       "slug": "bachelor-of-music-in-music-theatre",
       "url": "https://www.ust.edu.ph/bachelor-of-music-in-music-theatre/",
-      "cluster": "MAD"
-    },
-    {
-      "name": "Bachelor of Music major in Music Theory",
-      "slug": "bachelor-of-music-major-in-music-theory",
-      "url": "https://www.ust.edu.ph/bachelor-of-music-major-in-music-theory/",
       "cluster": "MAD"
     },
     {
@@ -590,9 +572,9 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2025-01-13",
-    "totalPrograms": 98,
-    "clusters": ["STEM", "Health", "ABM", "HUMSS", "MAD", "PES"],
+    "lastUpdated": "2026-04-09",
+    "totalPrograms": 95,
+    "clusters": ["STEM", "Health", "ABM", "HUMSS", "MAD"],
     "source": "https://www.ust.edu.ph/academics/programs/"
   }
 }
